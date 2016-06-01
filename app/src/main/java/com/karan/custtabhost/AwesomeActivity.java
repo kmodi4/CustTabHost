@@ -17,7 +17,7 @@ import android.widget.Toast;
  *
  */
 @SuppressWarnings("deprecation")
-public class AwesomeActivity extends TabActivity{
+public class AwesomeActivity extends TabActivity implements TabHost.OnTabChangeListener{
 	TabHost tabHost;
 	ImageView icon;
 	TextView title;
@@ -29,39 +29,8 @@ public class AwesomeActivity extends TabActivity{
 		setContentView(R.layout.main);
 		tabHost = getTabHost();
 		setTabs();
-		tabHost.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ImageView ic = (ImageView) view.findViewById(R.id.icon);
-				TextView tv = (TextView) view.findViewById(R.id.title);
-				ic.setColorFilter(Color.WHITE);
-				tv.setTextColor(Color.WHITE);
-			}
-		});
-		tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-			@Override
-			public void onTabChanged(String s) {
-				Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-				ImageView imageView;
-				TextView tv;
-				View v;
-				for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-				{
-					v = tabHost.getTabWidget().getChildAt(i);
-					//v.setBackgroundColor(Color.parseColor("#2B2B2B")); //unselected
-					imageView = (ImageView) v.findViewById(R.id.icon);
-                    tv = (TextView) v.findViewById(R.id.title);
-					imageView.setColorFilter(Color.parseColor("#2B2B2B"));
-					tv.setTextColor(Color.parseColor("#2B2B2B"));
-				}
-				v = tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab());
-				imageView = (ImageView) v.findViewById(R.id.icon);
-				tv = (TextView) v.findViewById(R.id.title);
-				//v.setBackgroundColor(Color.parseColor("#FFFFFF")); // selected
-				imageView.setColorFilter(Color.WHITE);
-				tv.setTextColor(Color.parseColor("#FFFFFF"));
-			}
-		});
+
+		tabHost.setOnTabChangedListener(this);
 
 		tabHost.getTabWidget().setDividerDrawable(null);
 	}
@@ -94,4 +63,26 @@ public class AwesomeActivity extends TabActivity{
 	}
 
 
+	@Override
+	public void onTabChanged(String s) {
+		//Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+		ImageView imageView;
+		TextView tv;
+		View v;
+		for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+		{
+			v = tabHost.getTabWidget().getChildAt(i);           //get TabWidget View
+			//v.setBackgroundColor(Color.parseColor("#2B2B2B")); //unselected
+			imageView = (ImageView) v.findViewById(R.id.icon);
+			tv = (TextView) v.findViewById(R.id.title);
+			imageView.setColorFilter(Color.parseColor("#2B2B2B"));
+			tv.setTextColor(Color.parseColor("#2B2B2B"));
+		}
+		v = tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab());  //get Selected Tab view
+		imageView = (ImageView) v.findViewById(R.id.icon);
+		tv = (TextView) v.findViewById(R.id.title);
+		//v.setBackgroundColor(Color.parseColor("#FFFFFF")); // selected
+		imageView.setColorFilter(Color.WHITE);
+		tv.setTextColor(Color.parseColor("#FFFFFF"));
+	}
 }
