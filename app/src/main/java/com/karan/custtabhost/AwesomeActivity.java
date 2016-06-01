@@ -42,11 +42,24 @@ public class AwesomeActivity extends TabActivity{
 			@Override
 			public void onTabChanged(String s) {
 				Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+				ImageView imageView;
+				TextView tv;
+				View v;
 				for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 				{
-					tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#2B2B2B")); //unselected
+					v = tabHost.getTabWidget().getChildAt(i);
+					//v.setBackgroundColor(Color.parseColor("#2B2B2B")); //unselected
+					imageView = (ImageView) v.findViewById(R.id.icon);
+                    tv = (TextView) v.findViewById(R.id.title);
+					imageView.setColorFilter(Color.parseColor("#2B2B2B"));
+					tv.setTextColor(Color.parseColor("#2B2B2B"));
 				}
-				tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#FFFFFF")); // selected
+				v = tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab());
+				imageView = (ImageView) v.findViewById(R.id.icon);
+				tv = (TextView) v.findViewById(R.id.title);
+				//v.setBackgroundColor(Color.parseColor("#FFFFFF")); // selected
+				imageView.setColorFilter(Color.WHITE);
+				tv.setTextColor(Color.parseColor("#FFFFFF"));
 			}
 		});
 	}
