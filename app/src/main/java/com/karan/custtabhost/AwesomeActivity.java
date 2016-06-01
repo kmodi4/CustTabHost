@@ -44,7 +44,7 @@ public class AwesomeActivity extends TabActivity{
 				Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
 				for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
 				{
-					tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#7392B5")); //unselected
+					tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#2B2B2B")); //unselected
 				}
 				tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#FFFFFF")); // selected
 			}
