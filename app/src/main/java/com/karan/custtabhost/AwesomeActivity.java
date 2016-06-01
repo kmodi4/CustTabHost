@@ -62,6 +62,8 @@ public class AwesomeActivity extends TabActivity{
 				tv.setTextColor(Color.parseColor("#FFFFFF"));
 			}
 		});
+
+		tabHost.getTabWidget().setDividerDrawable(null);
 	}
 	private void setTabs()
 	{
